@@ -25,6 +25,8 @@
         public const string CONSUMER_KEY = "xcWPaz75PSRDOWBM";
         public const string CONSUMER_SECRET = "DU5ZYaCK0cRlsMTj";
 
+        public const string CALL_BACK = "http://amon.me/Auth/kuaipan.aspx";
+
         public KuaipanServer()
         {
             RequestTokenUrl = "https://openapi.kuaipan.cn/open/requestToken";

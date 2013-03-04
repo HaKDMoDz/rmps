@@ -77,6 +77,8 @@ namespace Me.Amon.Open
 
         string Display(string path);
 
+        string Upload(string meta);
+
         HttpWebRequest Download(string meta);
     }
 }

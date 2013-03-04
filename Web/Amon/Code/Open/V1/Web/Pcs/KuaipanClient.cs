@@ -44,19 +44,17 @@ namespace Me.Amon.Open.V1.Web.Pcs
         #region 权限认证
         public override bool RequestToken()
         {
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(_Server.RequestTokenUrl)));
 
-            string t = GenBaseParams();
-            byte[] r = _Server.Get(_Server.RequestTokenUrl, t);
+            byte[] r = _Server.Get(_Server.RequestTokenUrl, GenBaseParams());
             if (r == null || r.Length < 1)
             {
                 return false;
             }
 
-            t = GetString(r);
-            Token = JsonConvert.DeserializeObject<KuaipanToken>(t);
+            Token = JsonConvert.DeserializeObject<KuaipanToken>(GetString(r));
             ResetParams();
 
             return true;
@@ -67,27 +65,25 @@ namespace Me.Amon.Open.V1.Web.Pcs
             return string.Format(_Server.VerifierUrl, Token.Token);
         }
 
-        public override bool AccessToken()
+        public override bool AccessToken(string verifier)
         {
-            PrepareParams();
             if (Token == null)
             {
                 return false;
             }
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.AccessTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(_Server.AccessTokenUrl)));
 
-            string t = GenBaseParams();
-            byte[] r = _Server.Get(_Server.AccessTokenUrl, t);
+            byte[] r = _Server.Get(_Server.AccessTokenUrl, GenBaseParams());
             if (r == null || r.Length < 1)
             {
                 return false;
             }
 
-            t = GetString(r);
-            _Result = t;
-            Token = JsonConvert.DeserializeObject<KuaipanToken>(t);
+            _Result = GetString(r);
+            Token = JsonConvert.DeserializeObject<KuaipanToken>(_Result);
             ResetParams();
 
             return true;
@@ -95,26 +91,6 @@ namespace Me.Amon.Open.V1.Web.Pcs
         #endregion
 
         #region 函数重写
-        protected override string GenerateBaseString(string uri, string method = "GET")
-        {
-            StringBuilder builder = new StringBuilder();
-            foreach (KeyValuePair<string, string> item in _Params)
-            {
-                if (string.IsNullOrWhiteSpace(item.Value))
-                {
-                    continue;
-                }
-
-                builder.Append(Uri.EscapeDataString(item.Key));
-                builder.Append('=');
-                builder.Append(Uri.EscapeDataString(item.Value));
-                builder.Append('&');
-            }
-
-            string temp = Uri.EscapeDataString(builder.ToString(0, builder.Length - 1));
-            return string.Format("{0}&{1}&{2}", method, Uri.EscapeDataString(uri), temp);
-        }
-
         protected override string GetString(byte[] buffer)
         {
             return Encoding.UTF8.GetString(buffer);
@@ -132,10 +108,10 @@ namespace Me.Amon.Open.V1.Web.Pcs
         {
             ResetParams();
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.ProfileUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(_Server.ProfileUrl)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(_Server.ProfileUrl, t);
@@ -182,10 +158,10 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(path)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(path, t);
@@ -204,10 +180,10 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(path)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(path, t);
@@ -225,10 +201,10 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = string.Format(KuaipanServer.SHARE_META, _Root, meta.GetMetaPath());
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(_Server.RequestTokenUrl)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -253,12 +229,12 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.CREATE_FOLDER;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("path", Combine(path, name));
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -281,13 +257,13 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.DELETE;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("path", Combine(path, meta));
             AddParam("to_recycle", "true");
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -307,13 +283,13 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.MOVETO;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -335,13 +311,13 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.COPYTO;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -369,13 +345,13 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.COPYTO;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_copy_ref", metaRef);
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -394,10 +370,10 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = string.Format(KuaipanServer.COPYREF, _Root, meta.GetMeta());
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(url, t);
@@ -410,61 +386,46 @@ namespace Me.Amon.Open.V1.Web.Pcs
             return JsonConvert.DeserializeObject<KuaipanMetaRef>(t);
         }
 
-        public TaskInfo NewUploadTask()
+        public string Upload(string path)
         {
-            return new KuaipanUpload(this);
-        }
+            ResetParams();
+            string url = KuaipanServer.UPLOAD;
 
-        public string BeginUpload(TaskInfo info)
-        {
-            lock (_Params)
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
+            SortParam();
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
+
+            string t = GenBaseParams();
+            byte[] r = _Server.Get(url, t);
+            if (r == null || r.Length < 1)
             {
-                ResetParams();
-                string url = KuaipanServer.UPLOAD;
-
-                PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
-                SortParam();
-                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
-
-                string t = GenBaseParams();
-                byte[] r = _Server.Get(url, t);
-                if (r == null || r.Length < 1)
-                {
-                    return null;
-                }
-
-                t = GetString(r);
-                KuaipanMetaUrl uri = JsonConvert.DeserializeObject<KuaipanMetaUrl>(t);
-                if (uri.stat != "OK")
-                {
-                    info.Message = uri.stat;
-                    return null;
-                }
-                return uri.url;
+                return null;
             }
-        }
 
-        public string ChangeUploadUrl(string url, string path)
-        {
-            lock (_Params)
+            t = GetString(r);
+            KuaipanMetaUrl uri = JsonConvert.DeserializeObject<KuaipanMetaUrl>(t);
+            if (uri.stat != "OK")
             {
-                ResetParams();
-                url = string.Format("{0}/1/fileops/upload_file", url);
-
-                PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
-                AddParam("root", _Root);
-                AddParam("overwrite", "true");
-                AddParam("path", path);
-                SortParam();
-                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url, "POST")));
-
-                url += url.IndexOf('?') >= 0 ? '&' : '?';
-                url += GenBaseParams();
-
-                return url;
+                _Result = uri.stat;
+                return null;
             }
+
+            ResetParams();
+            url = string.Format("{0}/1/fileops/upload_file", uri.url);
+
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
+            AddParam("root", _Root);
+            AddParam("overwrite", "true");
+            AddParam("path", path);
+            SortParam();
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url, "POST")));
+
+            url += url.IndexOf('?') >= 0 ? '&' : '?';
+            url += GenBaseParams();
+
+            return url;
         }
 
         public HttpWebRequest Download(string meta)
@@ -472,12 +433,12 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
             string url = KuaipanServer.DOWNLOAD;
 
-            PrepareParams();
+            GenOAuthBaseParams(KuaipanServer.CALL_BACK);
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("path", meta);
             SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, GenOAuthSignature(GenOAuthBaseString(url)));
 
             string t = GenBaseParams();
             url += url.IndexOf("?") >= 0 ? '&' : '?';
@@ -544,19 +505,6 @@ namespace Me.Amon.Open.V1.Web.Pcs
         #endregion
 
         #region 私有函数
-        private void PrepareParams()
-        {
-            AddParam(OAuthConstants.OAUTH_SIGNATURE_METHOD, "HMAC-SHA1");
-
-            AddParam(OAuthConstants.OAUTH_NONCE, KuaipanClient.GetOAuthNonce());
-            //AddParam(OAuthConstants.OAUTH_NONCE, "ChcAPp5A");
-            AddParam(OAuthConstants.OAUTH_TIMESTAMP, KuaipanClient.GetOAuthTimestamp());
-            //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1354715324");
-            AddParam(OAuthConstants.OAUTH_CONSUMER_KEY, Consumer.consumer_key);
-            AddParam(OAuthConstants.OAUTH_VERSION, "1.0");
-            AddParam(OAuthConstants.OAUTH_CALLBACK, "http://amon.me/Auth/kuaipan.aspx");
-        }
-
         private string GenBaseParams()
         {
             if (_Params.Count < 1)

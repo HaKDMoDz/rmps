@@ -1,4 +1,5 @@
 ﻿using System;
+using Me.Amon.Da.Db;
 using Me.Amon.Model;
 
 namespace Me.Amon
@@ -36,7 +37,16 @@ namespace Me.Amon
         protected void LbSignOf_Click(object sender, EventArgs e)
         {
             UserModel userModel = UserModel.Current(Session);
+            if (userModel.Code == Web.USER_DEMO)
+            {
+                var dba = new DBAccess();
+                dba.AddTable(DBConst.C3010A00);
+                dba.AddWhere(DBConst.C3010A03, Web.USER_DEMO);
+                dba.ExecuteDelete();
+            }
+
             userModel.WpSignOf();
+
             Response.Redirect("~/Index.aspx");
         }
     }

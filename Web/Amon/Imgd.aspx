@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Imgd.aspx.cs" Inherits="Me.Amon.Imgd" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-	<link rel="stylesheet" type="text/css" href="MooFlow.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
-	<script type="text/javascript" src="MooFlow.js"></script>
-<script type="text/javascript">
+    <link href="/_css/Amon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/_js/mf/MooFlow.css" />
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script type="text/javascript" src="/_js/mf/MooFlow.js"></script>
+    <script type="text/javascript">
 /* <![CDATA[ */
-
 	var myMooFlowPage = {
 	
 		start: function(){
@@ -24,7 +24,7 @@
 				useKeyInput: true,
 				useViewer: true,
 				onEmptyinit: function(){
-					this.loadJSON('skyset.json');
+					this.loadJSON('/Imgd.ashx');
 				},
 				onClickView: function(obj){
 					var a = new Element('a',{
@@ -59,14 +59,16 @@
 		
 	};
 	
-	window.addEvent('domready', myMooFlowPage.start);
-	
+	//window.addEvent('domready', myMooFlowPage.start);
 /* ]]> */
-</script>
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
     <div id="content">
+    </div>
+    <div id="DvHome" runat="server" style="position: fixed; width: 80px; height: 18px; top: 0px; right: 80px; border: 1px solid #eee; background-color: #fff; text-align: center; border-bottom: 2px solid #FD8712;">
+        <a href="/User/Index.aspx">我的首页</a>
     </div>
     </form>
 </body>

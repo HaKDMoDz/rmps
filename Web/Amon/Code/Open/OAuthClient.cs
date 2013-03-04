@@ -10,7 +10,7 @@ namespace Me.Amon.Open
 
         public abstract string GetAuthorizeUrl();
 
-        public abstract bool AccessToken();
+        public abstract bool AccessToken(string verifier);
 
         public static string GetOAuthNonce()
         {

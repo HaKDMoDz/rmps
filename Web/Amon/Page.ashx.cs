@@ -11,7 +11,6 @@ using Me.Amon.Model;
 using Me.Amon.Open;
 using Me.Amon.Open.M;
 using Me.Amon.Open.V1.Web.Pcs;
-using Me.Amon.Util;
 
 namespace Me.Amon
 {
@@ -20,7 +19,7 @@ namespace Me.Amon
     /// </summary>
     public class Pages : IHttpHandler, IRequiresSessionState
     {
-        private const string ROOT = "/我的网志";
+        private const string ROOT = "/" + Web.PAGE_NAME;
 
         /// <summary>
         /// 
@@ -28,7 +27,6 @@ namespace Me.Amon
         /// <param name="context"></param>
         public void ProcessRequest(HttpContext context)
         {
-            var response = context.Response;
             var type = context.Request["t"];
 
             OAuthToken token;
@@ -39,18 +37,18 @@ namespace Me.Amon
             //{
             // 加载用户授权
             var user = UserModel.Current(context.Session);
-            var page = context.Session["amon_page"] as MPage;
+            var page = context.Session[Web.SESSION_META] as MMeta;
             if (page == null || page.Token == null)
             {
                 if (type == "cat")
                 {
-                    context.Response.Write("[{ id:\"0\", pId:\"0\", name:\"我的网志\", t:\"我的网志\", isParent:true}]");
+                    context.Response.Write("[{ id:'0', pId:'0', name:'" + Web.PAGE_NAME + "', isParent:true}]");
                 }
                 else
                 {
                     LoadDef(context);
                 }
-                response.End();
+                context.Response.End();
                 return;
             }
             token = page.Token;
@@ -71,8 +69,8 @@ namespace Me.Amon
             // 加载页面目录
             if (type == "cat")
             {
-                LoadCat(response, client);
-                //response.End();
+                LoadCat(context.Response, client);
+                context.Response.End();
                 return;
             }
 
@@ -210,7 +208,7 @@ namespace Me.Amon
             {
                 LoadDef(context);
             }
-            response.End();
+            context.Response.End();
         }
 
         #region 目录相关
@@ -223,7 +221,7 @@ namespace Me.Amon
             response.ContentType = "text/javascript";
 
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("[{id:'0', pId:'0', name:'我的网志', t:'我的网志', isParent:true, open:true}");
+            buffer.Append("[{id:'0', pId:'0', name:'" + Web.PAGE_NAME + "', isParent:true, open:true}");
             LoadSub(buffer, client, ROOT, "0", false);
             buffer.Append("];");
             response.Write(buffer.ToString());

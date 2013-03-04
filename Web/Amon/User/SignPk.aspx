@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignPk.aspx.cs" Inherits="Me.Amon.User.SignPk" %>
+﻿<%@ Page Title="修改口令" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignPk.aspx.cs" Inherits="Me.Amon.User.SignPk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="server">
 </asp:Content>

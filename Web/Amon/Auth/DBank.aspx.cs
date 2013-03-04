@@ -2,15 +2,15 @@
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using Me.Amon.Code.Open.V1.Web.Pcs;
 using Me.Amon.Da.Db;
 using Me.Amon.Model;
 using Me.Amon.Open;
-using Me.Amon.Open.V1.Web.Pcs;
 using Me.Amon.Util;
 
 namespace Me.Amon.Auth
 {
-    public partial class Kuaipan : System.Web.UI.Page
+    public partial class DBank : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +31,7 @@ namespace Me.Amon.Auth
                 return;
             }
 
-            var client = Session["oAuth"] as KuaipanClient;
+            var client = Session["oAuth"] as DBankClient;
             if (client == null)
             {
                 return;
@@ -54,7 +54,7 @@ namespace Me.Amon.Auth
         private void RequestToken()
         {
             OAuthConsumer consumer = OAuthConsumer.KuaipanConsumer();
-            KuaipanClient client = new KuaipanClient(consumer, true);
+            DBankClient client = new DBankClient(consumer, true);
             if (!client.RequestToken())
             {
                 return;
@@ -79,8 +79,8 @@ namespace Me.Amon.Auth
             dba.AddParam(DBConst.C3010A03, code);
             dba.AddParam(DBConst.C3010A04, OAuthClient.KUAIPAN);
             dba.AddParam(DBConst.C3010A05, CharUtil.Text2DB(token.UserId));
-            dba.AddParam(DBConst.C3010A06, KuaipanServer.CONSUMER_KEY);
-            dba.AddParam(DBConst.C3010A07, KuaipanServer.CONSUMER_SECRET);
+            dba.AddParam(DBConst.C3010A06, DBankServer.CONSUMER_KEY);
+            dba.AddParam(DBConst.C3010A07, DBankServer.CONSUMER_SECRET);
             dba.AddParam(DBConst.C3010A08, CharUtil.Text2DB(token.Token));
             dba.AddParam(DBConst.C3010A09, CharUtil.Text2DB(token.Secret));
             dba.AddParam(DBConst.C3010A0A, 1);

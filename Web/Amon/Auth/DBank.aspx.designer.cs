@@ -7,9 +7,18 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Me.Amon.User {
+namespace Me.Amon.Auth {
     
     
-    public partial class Card {
+    public partial class DBank {
+        
+        /// <summary>
+        /// form1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

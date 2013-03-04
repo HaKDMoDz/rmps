@@ -35,6 +35,9 @@
             <br />
             正在努力为您加载中……
         </div>
+        <div id="DvHome" runat="server" style="position: fixed; width: 80px; height: 18px; top: 0px; right: 80px; border: 1px solid #eee; background-color: #fff; text-align: center; border-bottom: 2px solid #FD8712;">
+            <a href="/User/Index.aspx">我的首页</a>
+        </div>
     </div>
     <asp:HiddenField ID="HdCode" runat="server" />
     </form>
@@ -54,7 +57,6 @@
             }
         }
 
-        var zTree;
         var setting = {
             data: {
                 key: {
@@ -73,7 +75,7 @@
             }
         };
         var zNodes = [];
-        var t = $("#UlList");
+        var zTree = $("#UlList");
         var code = $('#HdCode').val();
 
         $.ajax({
@@ -81,12 +83,12 @@
             url: "/Page.ashx?t=cat&c=" + code,
             success: function (data) {
                 zNodes = eval(data);
-                $.fn.zTree.init(t, setting, zNodes);
+                $.fn.zTree.init(zTree, setting, zNodes);
                 $("#DvLoad").hide();
             },
             error: function (data) {
+                $.fn.zTree.init(zTree, setting, [{ id: '0', pId: '0', name: '我的网志', isParent: true, open: true}]);
                 $("#DvLoad").hide();
-                $.fn.zTree.init(t, setting, data);
                 alert(data.toString());
                 //alert('数据加载出错，请稍后尝试！');
             }

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Code.Model
 {
-    public class MPage
+    public class MMeta
     {
         public string Default { get; set; }
 

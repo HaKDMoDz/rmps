@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Me.Amon.Code.Model;
 using Me.Amon.Da.Db;
 using Me.Amon.Open.V1.Web.Pcs;
+using Me.Amon.Model;
 
 namespace Me.Amon
 {
@@ -14,6 +15,7 @@ namespace Me.Amon
             {
                 return;
             }
+            DvHome.Visible = UserModel.Current(Session).Code != "A0000000";
 
             // 获取参数
             var user = (Page.RouteData.Values["user"] as string) ?? Request["user"];
@@ -22,8 +24,8 @@ namespace Me.Amon
                 user = "Demo";
             }
 
-            MPage page = new MPage();
-            Session["amon_page"] = page;
+            MMeta page = new MMeta();
+            Session[Web.SESSION_META] = page;
 
             // 加载配置
             var dba = new DBAccess();

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Me.Amon.Model;
 
 namespace Me.Amon
 {
@@ -11,7 +7,11 @@ namespace Me.Amon
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                return;
+            }
+            DvHome.Visible = UserModel.Current(Session).Code != "A0000000";
         }
     }
 }

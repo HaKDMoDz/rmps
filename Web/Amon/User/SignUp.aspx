@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Me.Amon.User.SignUp" %>
+﻿<%@ Page Title="用户注册" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Me.Amon.User.SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="server">
 </asp:Content>
