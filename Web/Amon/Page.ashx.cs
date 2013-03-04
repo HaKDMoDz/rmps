@@ -42,7 +42,7 @@ namespace Me.Amon
             {
                 if (type == "cat")
                 {
-                    context.Response.Write("[{ id:'0', pId:'0', name:'" + Web.PAGE_NAME + "', isParent:true}]");
+                    context.Response.Write("[{ id:'0', pId:'0', name:'" + Web.PAGE_NAME + "', isParent:true, open:true}]");
                 }
                 else
                 {
@@ -343,9 +343,8 @@ namespace Me.Amon
         /// <returns></returns>
         private void LoadDef(HttpContext context)
         {
-            var file = context.Server.MapPath("/docs/Page.htm");
-            string page = File.ReadAllText(file);
-            context.Response.Write(page);
+            context.Response.ContentType = "text/html";
+            context.Response.Write(Web.DefLog());
         }
 
         /// <summary>
