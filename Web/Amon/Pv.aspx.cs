@@ -15,13 +15,12 @@ namespace Me.Amon
             {
                 return;
             }
-            DvHome.Visible = UserModel.Current(Session).Code != "A0000000";
 
             // 获取参数
             var user = (Page.RouteData.Values["user"] as string) ?? Request["user"];
             if (user == null || !Regex.IsMatch(user, "^\\w{4,}$"))
             {
-                user = "Demo";
+                user = "Help";
             }
 
             MMeta page = new MMeta();
@@ -57,6 +56,7 @@ namespace Me.Amon
             DvIdea.Style.Add("width", "300px");
             DvPage.Style.Add("margin", "0px 0px 0px 246px");
             DvIdea.Style.Add("display", "none");
+            DvHome.Visible = UserModel.Current(Session).Rank > IUser.LEVEL_00;
         }
     }
 }
