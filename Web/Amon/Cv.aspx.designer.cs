@@ -10,7 +10,7 @@
 namespace Me.Amon {
     
     
-    public partial class Card {
+    public partial class Cv {
         
         /// <summary>
         /// form1 控件。
@@ -40,30 +40,12 @@ namespace Me.Amon {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DvList;
         
         /// <summary>
-        /// DvPage 控件。
+        /// LbNote 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DvPage;
-        
-        /// <summary>
-        /// IfPage 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl IfPage;
-        
-        /// <summary>
-        /// DvIdea 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DvIdea;
+        protected global::System.Web.UI.WebControls.Label LbNote;
     }
 }

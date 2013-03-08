@@ -1,4 +1,4 @@
-﻿<%@ Page Title="编辑网志" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Page.aspx.cs" Inherits="Me.Amon.User.Page" %>
+﻿<%@ Page Title="编辑网志" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Pm.aspx.cs" Inherits="Me.Amon.Pm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="Server">
     <script type="text/javascript">

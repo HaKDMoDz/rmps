@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Card.aspx.cs" Inherits="Me.Amon.Card" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cv.aspx.cs" Inherits="Me.Amon.Cv" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,14 +18,14 @@
                 <ul id="UlList" class="ztree">
                 </ul>
             </div>
-            <!--div id="DvPage" class="page shadow">
-            </div-->
+            <div id="DvPage" class="page shadow">
+                <asp:Label ID="LbNote" runat="server"></asp:Label>
+            </div>
             <div class="clear">
             </div>
         </div>
-        <div id="DvIdea" runat="server" class="idea shadow">
-            abc
-        </div>
+        <!--div id="DvIdea" class="idea shadow">
+        </div-->
         <div id="DvLoad" class="load corner" style="width: 300px; height: 100px; margin-left: -150px; margin-top: -40px; text-align: center">
             <br />
             <img alt="Loading" src="/_img/Loading.gif" /><br />

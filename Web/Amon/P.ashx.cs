@@ -17,7 +17,7 @@ namespace Me.Amon
     /// <summary>
     /// Pages 的摘要说明
     /// </summary>
-    public class Pages : IHttpHandler, IRequiresSessionState
+    public class P : IHttpHandler, IRequiresSessionState
     {
         private const string ROOT = "/" + Web.PAGE_NAME;
 

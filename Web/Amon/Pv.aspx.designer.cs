@@ -10,7 +10,7 @@
 namespace Me.Amon {
     
     
-    public partial class Page {
+    public partial class Pv {
         
         /// <summary>
         /// Head1 控件。

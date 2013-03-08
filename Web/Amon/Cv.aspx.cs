@@ -5,13 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Me.Amon.User
+namespace Me.Amon
 {
-    public partial class Card : System.Web.UI.Page
+    public partial class Cv : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

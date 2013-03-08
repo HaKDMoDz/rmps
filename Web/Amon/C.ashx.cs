@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
+using Me.Amon.Da.Db;
 
 namespace Me.Amon
 {
     /// <summary>
     /// Card1 的摘要说明
     /// </summary>
-    public class Card1 : IHttpHandler
+    public class C : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            context.Response.ContentType = "text/javascript";
         }
 
         public bool IsReusable

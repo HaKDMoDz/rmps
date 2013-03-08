@@ -48,7 +48,7 @@ namespace Amon
             routes.MapPageRoute(
                "user-page", // Route name
                "w/{user}", // Route URL
-               "~/Page.aspx", // Web page to handle route
+               "~/Pv.aspx", // Web page to handle route
                true,
                def,
                reg
@@ -57,7 +57,7 @@ namespace Amon
             routes.MapPageRoute(
                "user-card", // Route name
                "c/{user}", // Route URL
-               "~/Card.aspx", // Web page to handle route
+               "~/Cv.aspx", // Web page to handle route
                true,
                def,
                reg
@@ -66,7 +66,7 @@ namespace Amon
             routes.MapPageRoute(
                "user-imgs", // Route name
                "p/{user}", // Route URL
-               "~/Imgs.aspx", // Web page to handle route
+               "~/Id.aspx", // Web page to handle route
                true,
                def,
                reg

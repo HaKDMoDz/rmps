@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page.aspx.cs" Inherits="Me.Amon.Page" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pv.aspx.cs" Inherits="Me.Amon.Pv" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,7 +43,7 @@
     </form>
     <script type="text/javascript">
         function reload(url) {
-            $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
+            $('#IfPage').attr("src", "/P.ashx?c=" + code + "&f=" + escape(url));
             $("#IfPage").load(function () {
                 var h = $(this).contents().find("body").height() + 30;
                 if (h < 420) { h = 420; }
@@ -53,7 +53,7 @@
         reload("/index.html");
         function onClick(event, treeId, treeNode, clickFlag) {
             if (treeNode.v) {
-                $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
+                $('#IfPage').attr("src", "/P.ashx?c=" + code + "&f=" + escape(treeNode.v));
             }
         }
 
@@ -80,7 +80,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Page.ashx?t=cat&c=" + code,
+            url: "/P.ashx?t=cat&c=" + code,
             success: function (data) {
                 zNodes = eval(data);
                 $.fn.zTree.init(zTree, setting, zNodes);

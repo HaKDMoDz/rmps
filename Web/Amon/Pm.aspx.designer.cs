@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Me.Amon.User {
+namespace Me.Amon {
     
     
-    public partial class Page {
+    public partial class Pm {
         
         /// <summary>
         /// HfData 控件。

@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Me.Amon.User {
+namespace Me.Amon {
     
     
-    public partial class Card {
+    public partial class Cm {
     }
 }

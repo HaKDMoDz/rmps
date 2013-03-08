@@ -10,7 +10,7 @@
 namespace Me.Amon {
     
     
-    public partial class Imgd {
+    public partial class Id {
         
         /// <summary>
         /// form1 控件。

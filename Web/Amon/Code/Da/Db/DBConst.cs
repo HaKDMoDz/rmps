@@ -1296,7 +1296,7 @@
         #endregion
         #endregion
 
-        #region
+        #region 日志
         public const string LOGS0100 = "LOGS0100";
         /// <summary>
         /// 显示排序
@@ -1328,5 +1328,90 @@
         public const string LOGS0106 = "LOGS0106";
         public const int LOGS0106_SIZE = 16;
         #endregion
+
+        #region
+        public const string W2060000 = "W2060000";
+
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public const string W2060001 = "W2060001";
+        /// <summary>
+        /// 类型：random,fixed
+        /// </summary>
+        public const string W2060002 = "W2060002";
+        public const int W2060002_SIZE = 16;
+        /// <summary>
+        /// 索引
+        /// </summary>
+        public const string W2060003 = "W2060003";
+        public const int W2060003_SIZE = 64;
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public const string W2060004 = "W2060004";
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public const string W2060005 = "W2060005";
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060100 = "W2060100";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060101 = "W2060101";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060102 = "W2060102";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060103 = "W2060103";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060104 = "W2060104";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060105 = "W2060105";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060106 = "W2060106";
+        public const int W2060106_SIZE = 16;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060107 = "W2060107";
+        public const int W2060107_SIZE = 16;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W2060108 = "W2060108";
+        public const int W2060108_SIZE = 16;
+        /// <summary>
+        /// 分类
+        /// </summary>
+        public const string W2060109 = "W2060109";
+        public const int W2060109_SIZE = 256;
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public const string W206010A = "W206010A";
+        public const int W206010A_SIZE = 512;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W206010B = "W206010B";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string W206010C = "W206010C";
     }
 }

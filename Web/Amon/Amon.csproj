@@ -60,14 +60,14 @@
     <Content Include="Auth\DBank.aspx" />
     <Content Include="Auth\Kuaipan.aspx" />
     <Content Include="blog\Index.htm" />
-    <Content Include="Card.aspx" />
+    <Content Include="Cv.aspx" />
     <Content Include="Demo.aspx" />
     <Content Include="docs\Amon.Me.xml" />
     <Content Include="docs\Code.htm" />
     <Content Include="docs\Page.htm" />
     <Content Include="Global.asax" />
     <Content Include="Ideas.aspx" />
-    <Content Include="Imgd.aspx" />
+    <Content Include="Id.aspx" />
     <Content Include="Imgs.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="logo\amon\favicon.ico" />
@@ -194,10 +194,10 @@
     <Content Include="logo\soft\logo64.png" />
     <Content Include="logo\soft\logo96.png" />
     <Content Include="logo\soft\logo_2.svg" />
-    <Content Include="Page.aspx" />
-    <Content Include="User\Card.aspx" />
+    <Content Include="Pv.aspx" />
+    <Content Include="Cm.aspx" />
     <Content Include="User\Index.aspx" />
-    <Content Include="User\Page.aspx" />
+    <Content Include="Pm.aspx" />
     <Content Include="User\SignIn.aspx" />
     <Content Include="User\SignPk.aspx" />
     <Content Include="User\SignUp.aspx" />
@@ -551,15 +551,15 @@
     <Compile Include="Auth\Kuaipan.aspx.designer.cs">
       <DependentUpon>Kuaipan.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Card.ashx.cs">
-      <DependentUpon>Card.ashx</DependentUpon>
+    <Compile Include="C.ashx.cs">
+      <DependentUpon>C.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Card.aspx.cs">
-      <DependentUpon>Card.aspx</DependentUpon>
+    <Compile Include="Cv.aspx.cs">
+      <DependentUpon>Cv.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Card.aspx.designer.cs">
-      <DependentUpon>Card.aspx</DependentUpon>
+    <Compile Include="Cv.aspx.designer.cs">
+      <DependentUpon>Cv.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Bean\AAtt.cs" />
     <Compile Include="Code\Bean\Att\DataAtt.cs" />
@@ -601,6 +601,7 @@
     <Compile Include="Code\IMsg.cs" />
     <Compile Include="Code\IUser.cs" />
     <Compile Include="Code\Model\MMeta.cs" />
+    <Compile Include="Code\Model\MNote.cs" />
     <Compile Include="Code\Model\UserModel.cs" />
     <Compile Include="Code\Open\M\AMeta.cs" />
     <Compile Include="Code\Open\M\AMetaRef.cs" />
@@ -668,12 +669,12 @@
     <Compile Include="Img.ashx.cs">
       <DependentUpon>Img.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Imgd.aspx.cs">
-      <DependentUpon>Imgd.aspx</DependentUpon>
+    <Compile Include="Id.aspx.cs">
+      <DependentUpon>Id.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Imgd.aspx.designer.cs">
-      <DependentUpon>Imgd.aspx</DependentUpon>
+    <Compile Include="Id.aspx.designer.cs">
+      <DependentUpon>Id.aspx</DependentUpon>
     </Compile>
     <Compile Include="Imgs.aspx.cs">
       <DependentUpon>Imgs.aspx</DependentUpon>
@@ -689,15 +690,15 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Page.ashx.cs">
-      <DependentUpon>Page.ashx</DependentUpon>
+    <Compile Include="P.ashx.cs">
+      <DependentUpon>P.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Page.aspx.cs">
-      <DependentUpon>Page.aspx</DependentUpon>
+    <Compile Include="Pv.aspx.cs">
+      <DependentUpon>Pv.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page.aspx.designer.cs">
-      <DependentUpon>Page.aspx</DependentUpon>
+    <Compile Include="Pv.aspx.designer.cs">
+      <DependentUpon>Pv.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -710,12 +711,12 @@
     <Compile Include="s.ashx.cs">
       <DependentUpon>s.ashx</DependentUpon>
     </Compile>
-    <Compile Include="User\Card.aspx.cs">
-      <DependentUpon>Card.aspx</DependentUpon>
+    <Compile Include="Cm.aspx.cs">
+      <DependentUpon>Cm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User\Card.aspx.designer.cs">
-      <DependentUpon>Card.aspx</DependentUpon>
+    <Compile Include="Cm.aspx.designer.cs">
+      <DependentUpon>Cm.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -724,12 +725,12 @@
     <Compile Include="User\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="User\Page.aspx.cs">
-      <DependentUpon>Page.aspx</DependentUpon>
+    <Compile Include="Pm.aspx.cs">
+      <DependentUpon>Pm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User\Page.aspx.designer.cs">
-      <DependentUpon>Page.aspx</DependentUpon>
+    <Compile Include="Pm.aspx.designer.cs">
+      <DependentUpon>Pm.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -771,10 +772,10 @@
     <Folder Include="Root\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Card.ashx" />
+    <Content Include="C.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Page.ashx" />
+    <Content Include="P.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />

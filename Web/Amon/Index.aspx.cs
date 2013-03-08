@@ -12,6 +12,10 @@ namespace Me.Amon
                 return;
             }
 
+            var note = Web.NextNote();
+            LbName.Text = note.Name;
+            LbText.Text = note.Text;
+
             DBAccess dba = new DBAccess();
             dba.AddTable(DBConst.LOGS0100);
             dba.AddColumn(DBConst.LOGS0104);

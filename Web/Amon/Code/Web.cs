@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web;
 using Me.Amon.Da.Db;
+using Me.Amon.Model;
 using Me.Amon.Open;
 
 namespace Me.Amon
@@ -81,6 +83,69 @@ namespace Me.Amon
                 }
             }
             return _DefLog;
+        }
+
+        private static MNote _Note;
+        public static MNote NextNote()
+        {
+            if (_Note == null)
+            {
+                _Note = new MNote();
+                _Note.Update = DateTime.MinValue;
+
+                var dba = new DBAccess();
+                dba.AddTable(DBConst.W2060000);
+                dba.AddColumn(DBConst.W2060003);
+                dba.AddWhere(DBConst.W2060001, "1");
+                var data = dba.ExecuteSelect();
+                if (data.Rows.Count == 1)
+                {
+                    _Note.Order = "" + data.Rows[0][DBConst.W2060003];
+                }
+                _Note.Update = DateTime.MinValue;
+            }
+
+            if (_Note.Update.Day != DateTime.Now.Day)
+            {
+                var dba = new DBAccess();
+                dba.AddTable(DBConst.W2060100);
+                dba.AddColumn(DBConst.W2060105);
+                dba.AddColumn(DBConst.W2060109);
+                dba.AddColumn(DBConst.W206010A);
+                dba.AddWhere(DBConst.W2060105, ">", "" + _Note.Order, false);
+                dba.AddSort(DBConst.W2060105);
+                dba.AddLimit(1);
+
+                var dat = dba.ExecuteSelect();
+                if (dat.Rows.Count < 1)
+                {
+                    dba.ReInit();
+                    dba.AddTable(DBConst.W2060100);
+                    dba.AddColumn(DBConst.W2060109);
+                    dba.AddColumn(DBConst.W206010A);
+                    dba.AddSort(DBConst.W2060105);
+                    dba.AddLimit(1);
+                    dat = dba.ExecuteSelect();
+                    if (dat.Rows.Count < 1)
+                    {
+                        _Note.Text = "^_^";
+                        return _Note;
+                    }
+                }
+
+                var row = dat.Rows[0];
+                _Note.Name = "" + row[DBConst.W2060109];
+                _Note.Text = "" + row[DBConst.W206010A];
+                _Note.Order = "" + row[DBConst.W2060105];
+                _Note.Update = DateTime.Now;
+
+                dba.ReInit();
+                dba.AddTable(DBConst.W2060000);
+                dba.AddParam(DBConst.W2060003, _Note.Order);
+                dba.AddWhere(DBConst.W2060001, "1");
+                dba.ExecuteUpdate();
+            }
+            return _Note;
         }
     }
 }
