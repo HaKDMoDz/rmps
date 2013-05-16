@@ -42,11 +42,11 @@
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.ScGuid = new System.Windows.Forms.SplitContainer();
             this.ScData = new System.Windows.Forms.SplitContainer();
-            this.UcFind = new Me.Amon.Pwd.V.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.UcTimer = new System.Windows.Forms.Timer(this.components);
+            this.UcFind = new Me.Amon.Pwd.V.FindBar();
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -200,15 +200,6 @@
             this.ScData.SplitterDistance = 80;
             this.ScData.TabIndex = 1;
             // 
-            // UcFind
-            // 
-            this.UcFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.UcFind.KeyList = null;
-            this.UcFind.Location = new System.Drawing.Point(0, 0);
-            this.UcFind.Name = "UcFind";
-            this.UcFind.Size = new System.Drawing.Size(374, 29);
-            this.UcFind.TabIndex = 0;
-            // 
             // TbTool
             // 
             this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
@@ -227,6 +218,15 @@
             this.UcTimer.Interval = 200;
             this.UcTimer.Tick += new System.EventHandler(this.UcTimer_Tick);
             // 
+            // UcFind
+            // 
+            this.UcFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UcFind.KeyList = null;
+            this.UcFind.Location = new System.Drawing.Point(0, 0);
+            this.UcFind.Name = "UcFind";
+            this.UcFind.Size = new System.Drawing.Size(374, 29);
+            this.UcFind.TabIndex = 0;
+            // 
             // WPwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -236,6 +236,7 @@
             this.Controls.Add(this.SbEcho);
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
+            this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "WPwd";
             this.Text = "阿木密码箱";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WPwd_FormClosing);

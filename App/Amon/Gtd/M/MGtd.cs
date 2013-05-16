@@ -11,90 +11,102 @@ namespace Me.Amon.Gtd.M
     {
         #region 基本信息
         /// <summary>
-        /// 任务名称
-        /// </summary>
-        public string Title { get; set; }
-        /// <summary>
         /// 显示排序
         /// </summary>
-        public int Order { get; set; }
+        public int Order;
         /// <summary>
         /// 任务类型
         /// </summary>
-        public int Type { get; set; }
+        public int Type;
         /// <summary>
-        /// 任务级别
+        /// 任务名称
         /// </summary>
-        public int Priority { get; set; }
-        /// <summary>
-        /// 任务状态
-        /// </summary>
-        public int Status { get; set; }
-        /// <summary>
-        /// 完成度
-        /// </summary>
-        public int Percent { get; set; }
-        /// <summary>
-        /// 起始时间
-        /// </summary>
-        public DateTime StartTime { get; set; }
+        public string Subject;
         /// <summary>
         /// 相关说明
         /// </summary>
-        public string Memo { get; set; }
+        public string Content;
+        /// <summary>
+        /// 项目
+        /// </summary>
+        public string Project;
+        /// <summary>
+        /// 任务级别
+        /// </summary>
+        public int Priority;
+        /// <summary>
+        /// 任务状态
+        /// </summary>
+        public int Status;
+        /// <summary>
+        /// 完成度
+        /// </summary>
+        public int Percent;
+        /// <summary>
+        /// 起始时间
+        /// </summary>
+        public DateTime StartTime;
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public List<Memo> Memos;
+        /// <summary>
+        /// 相关标签
+        /// </summary>
+        public string[] Tags;
         #endregion
 
         #region 重复控制
         /// <summary>
         /// 重复方式
         /// </summary>
-        public int EndType { get; set; }
+        public int EndType;
         /// <summary>
         /// 执行次数
         /// </summary>
-        public int ExeCount { get; set; }
+        public int ExeCount;
         /// <summary>
         /// 结束时间
         /// </summary>
-        public DateTime EndTime { get; set; }
+        public DateTime EndTime;
         /// <summary>
         /// 上次时间
         /// </summary>
-        public DateTime LastTime { get; set; }
+        public DateTime LastTime;
         #endregion
 
         #region 提醒方式
         /// <summary>
         /// 提示方式
         /// </summary>
-        public int HintType { get; set; }
+        public int HintType;
         /// <summary>
         /// 执行参数
         /// </summary>
-        public string Command { get; set; }
+        public string Command;
         /// <summary>
         /// 附加参数
         /// </summary>
-        public string Params { get; set; }
+        public string Params;
         #endregion
 
         #region 高级特性
         /// <summary>
         /// 可否共用
         /// </summary>
-        public bool Shared { get; set; }
+        public bool Shared;
         /// <summary>
         /// 上级任务
         /// </summary>
-        public string SupGtd { get; set; }
+        public string SupGtd;
         /// <summary>
         /// 前置任务
         /// </summary>
-        public string PreGtd { get; set; }
+        public string PreGtd;
         /// <summary>
         /// 相关引用
         /// </summary>
-        public string RefId { get; set; }
+        public string RefId;
         #endregion
 
         public MGtd()
@@ -158,15 +170,15 @@ namespace Me.Amon.Gtd.M
         /// <summary>
         /// 下次时间
         /// </summary>
-        public DateTime NextTime { get; set; }
+        public DateTime NextTime;
         /// <summary>
         /// 是否提前
         /// </summary>
-        public int PrePose { get; set; }
+        public int PrePose;
         /// <summary>
         /// 提前间隔
         /// </summary>
-        public int PreTime { get; set; }
+        public int PreTime;
         /// <summary>
         /// 数值列表
         /// </summary>
@@ -352,7 +364,7 @@ namespace Me.Amon.Gtd.M
         /// <summary>
         /// 计算公式 
         /// </summary>
-        public string Maths { get; set; }
+        public string Maths;
 
         private bool TestMaths(DateTime time)
         {
@@ -373,6 +385,11 @@ namespace Me.Amon.Gtd.M
         public override bool ToXml(System.Xml.XmlWriter writer)
         {
             return true;
+        }
+
+        public override string ToString()
+        {
+            return Subject;
         }
     }
 }

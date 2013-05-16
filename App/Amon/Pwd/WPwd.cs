@@ -39,6 +39,7 @@ namespace Me.Amon.Pwd
     {
         private ICatTree _CatTree;
         private IKeyList _KeyList;
+
         #region 全局变量
         private Main _Main;
         private UserModel _UserModel;
@@ -50,9 +51,14 @@ namespace Me.Amon.Pwd
         private WWiz _WizView;
         private APad _PadView;
         private KeyInfo _KeyInfo;
+        #endregion
+
         private XmlMenu<WPwd> _XmlMenu;
         private ContextMenuStrip _AttMenu;
-        #endregion
+        /// <summary>
+        /// 最小化视图
+        /// </summary>
+        private bool _MiniStyle;
 
         /// <summary>
         /// 消息等待时间
@@ -117,8 +123,8 @@ namespace Me.Amon.Pwd
             _XmlMenu = new XmlMenu<WPwd>(this, _ViewModel);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPwd.XML_MENU)))
             {
-                _XmlMenu.GetMenuBar("WPwd", MbMenu);
-                _XmlMenu.GetToolBar("WPwd", TbTool);
+                _XmlMenu.GetMenuBar(CPwd.APP_KEY, MbMenu);
+                _XmlMenu.GetToolBar(CPwd.APP_KEY, TbTool);
                 ContextMenuStrip CmCat = new ContextMenuStrip();
                 _XmlMenu.GetPopMenu("WCat", CmCat);
                 _CatTree.PopupMenu = CmCat;
@@ -129,8 +135,8 @@ namespace Me.Amon.Pwd
 
                 _AttMenu = new ContextMenuStrip();
                 _XmlMenu.GetPopMenu("WAtt", _AttMenu);
-                _XmlMenu.GetStrokes("WPwd", this);
-                if (_XmlMenu.GetHotkeys("WPwd", this))
+                _XmlMenu.GetStrokes(CPwd.APP_KEY, this);
+                if (_XmlMenu.GetHotkeys(CPwd.APP_KEY, this))
                 {
                     foreach (var hotkey in _XmlMenu.Hotkeys)
                     {
@@ -166,6 +172,20 @@ namespace Me.Amon.Pwd
             TpTips.SetToolTip(control, caption);
         }
 
+        private List<string> _Shown = new List<string>();
+        private void ShowEcho(string key, string message)
+        {
+            foreach (string tmp in _Shown)
+            {
+                if (tmp == key)
+                {
+                    return;
+                }
+            }
+            _Shown.Add(key);
+            ShowEcho(message);
+        }
+
         public void ShowEcho(string message)
         {
             if (_EchoDelay > 0)
@@ -181,7 +201,6 @@ namespace Me.Amon.Pwd
             {
                 TlEcho.Text = message;
             }
-            //TlEcho.Text = message;
         }
 
         public void ShowEcho(string message, int delay)
@@ -245,14 +264,22 @@ namespace Me.Amon.Pwd
         #region 事件处理
         private void WPwd_Resize(object sender, EventArgs e)
         {
-            //if (!Visible)
-            //{
-            //    return;
-            //}
-            //if (Width < 360 || Height < 360)
-            //{
-            //    ShowAPad();
-            //}
+            if (!Visible)
+            {
+                return;
+            }
+
+            _MiniStyle = Width < 320 || Height < 460;
+            if (_MiniStyle)
+            {
+                ScMain.Panel1Collapsed = true;
+                MbMenu.Visible = false;
+                return;
+            }
+            ScMain.Panel1Collapsed = !_ViewModel.KeyGuidVisible;
+            MbMenu.Visible = _ViewModel.MenuBarVisible;
+
+            //ShowAPad();
             //if (WindowState == FormWindowState.Minimized)
             //{
             //    Visible = false;
@@ -500,6 +527,8 @@ namespace Me.Amon.Pwd
             {
                 group.Checked(key.Major.ToString());
             }
+
+            _DataModel.UpdateKey(key);
         }
 
         /// <summary>
@@ -1197,7 +1226,7 @@ namespace Me.Amon.Pwd
             set
             {
                 MbMenu.Visible = value;
-                _ViewModel.MenuBarVisible = value;
+                _ViewModel.MenuBarVisible = !_MiniStyle && value;
             }
         }
 
@@ -1261,7 +1290,7 @@ namespace Me.Amon.Pwd
             set
             {
                 _ViewModel.KeyGuidVisible = value;
-                ScMain.Panel1Collapsed = !value;
+                ScMain.Panel1Collapsed = _MiniStyle || !value;
             }
         }
 
@@ -1280,13 +1309,13 @@ namespace Me.Amon.Pwd
                 switch (_ViewModel.LayoutStyle)
                 {
                     case CPwd.LAYOUT_STYLE_0:
-                        ScGuid.Panel1Collapsed = !value;
+                        ScGuid.Panel1Collapsed = _MiniStyle || !value;
                         break;
                     case CPwd.LAYOUT_STYLE_1:
-                        ScMain.Panel1Collapsed = !value;
+                        ScMain.Panel1Collapsed = _MiniStyle || !value;
                         break;
                     case CPwd.LAYOUT_STYLE_2:
-                        ScMain.Panel1Collapsed = !value;
+                        ScMain.Panel1Collapsed = _MiniStyle || !value;
                         break;
                     default:
                         break;
@@ -2301,13 +2330,13 @@ namespace Me.Amon.Pwd
                 Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             }
 
-            MbMenu.Visible = _ViewModel.MenuBarVisible;
+            MbMenu.Visible = !_MiniStyle && _ViewModel.MenuBarVisible;
             TbTool.Visible = _ViewModel.ToolBarVisible;
             SbEcho.Visible = _ViewModel.EchoBarVisible;
 
             UcFind.Visible = _ViewModel.FindBarVisible;
 
-            ScMain.Panel1Collapsed = !_ViewModel.KeyGuidVisible;
+            ScMain.Panel1Collapsed = _MiniStyle || !_ViewModel.KeyGuidVisible;
             ScMain.SplitterDistance = _ViewModel.KeyGuidWidth;
 
             ScGuid.Panel1.Controls.Add(_CatTree.Control);

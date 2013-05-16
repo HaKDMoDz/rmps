@@ -124,7 +124,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             Gtd.M.MGtd gtd = editor.MGtd;
             _Att.Gtd = gtd;
-            _Att.Text = gtd.Title;
+            _Att.Text = gtd.Subject;
             _Att.Icon = Resources.Hint;
             _Att.Modified = true;
 

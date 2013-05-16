@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Me.Amon.Da;
-using Me.Amon.Gtd;
-using Me.Amon.Gtd.M;
 using Me.Amon.M;
-using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.M
 {
@@ -186,6 +183,12 @@ namespace Me.Amon.Pwd.M
                 return key.UserCode == _UserModel.Code && key.Major == major;
             });
             return keys;
+        }
+
+        public void UpdateKey(Key key)
+        {
+            key.Order += 1;
+            _DbEngine.Save(key);
         }
         #endregion
 

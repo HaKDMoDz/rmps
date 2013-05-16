@@ -253,7 +253,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             Gtd.M.MGtd gtd = editor.MGtd;
             HintAtt hint = _SafeModel.Hint;
             hint.Gtd = gtd;
-            hint.Text = gtd.Title;
+            hint.Text = gtd.Subject;
             hint.Icon = Resources.Hint;
             _SafeModel.Modified = true;
 

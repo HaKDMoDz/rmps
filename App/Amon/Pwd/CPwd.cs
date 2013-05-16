@@ -2,6 +2,8 @@ namespace Me.Amon.Pwd
 {
     public class CPwd
     {
+        public const string APP_KEY = "WPwd";
+
         public const string DEF_CAT_ID = "0";
         public const string DEF_CAT_IMG = "0";
 

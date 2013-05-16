@@ -137,10 +137,20 @@ namespace Me.Amon.M
         #region 任务提醒
         public void Start()
         {
+            if (_Hinted == null)
+            {
+                _Hinted = new List<string>();
+            }
+            else
+            {
+                _Hinted.Clear();
+            }
+
             if (_Timer == null)
             {
                 _Timer = new Timer(Timer_Callback);
             }
+
             _Timer.Change(5000, 1000);
         }
 
@@ -168,6 +178,10 @@ namespace Me.Amon.M
 
         private Timer _Timer;
         private IList<MGtd> _MGtds;
+        /// <summary>
+        /// 已提示列表
+        /// </summary>
+        private IList<string> _Hinted;
         private int _TodoCnt;
         private int _PastCnt;
         private int _Delay;
@@ -223,11 +237,7 @@ namespace Me.Amon.M
                     if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
                     {
                         _TodoCnt += 1;
-                        if (_Main != null)
-                        {
-                            _Main.ShowFlicker();
-                            _Main.ShowBubbleTips(gtd.Title);
-                        }
+                        ShowHint(gtd);
                         continue;
                     }
                     if (gtd.Status == Gtd.CGtd.STATUS_NOTICE)
@@ -272,6 +282,30 @@ namespace Me.Amon.M
             {
                 Monitor.Exit(_SyncObj);
             }
+        }
+
+        /// <summary>
+        /// 提示相应的信息
+        /// </summary>
+        /// <param name="gtd"></param>
+        private void ShowHint(MGtd gtd)
+        {
+            if (_Main == null)
+            {
+                return;
+            }
+
+            foreach (var tmp in _Hinted)
+            {
+                if (tmp == gtd.Id)
+                {
+                    return;
+                }
+            }
+
+            _Main.ShowFlicker();
+            _Main.ShowBubbleTips(gtd.Subject);
+            _Hinted.Add(gtd.Id);
         }
 
         public void ReloadGtds()

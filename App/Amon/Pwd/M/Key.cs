@@ -163,7 +163,7 @@ namespace Me.Amon.Pwd.M
                 writer.WriteElementString("Window", Window);
                 writer.WriteElementString("Script", Script);
                 writer.WriteElementString("Memo", Memo);
-                writer.WriteElementString("VisitDate", AccessTime);
+                writer.WriteElementString("AccessTime", AccessTime);
                 writer.WriteElementString("CipherVer", CipherVer.ToString());
                 writer.WriteElementString("Backup", Backup ? "true" : "false");
 
@@ -250,7 +250,7 @@ namespace Me.Amon.Pwd.M
             {
                 Memo = reader.ReadElementContentAsString();
             }
-            if (reader.Name == "VisitDate" || reader.ReadToNextSibling("VisitDate"))
+            if (reader.Name == "AccessTime" || reader.ReadToNextSibling("AccessTime"))
             {
                 AccessTime = reader.ReadElementContentAsString();
             }

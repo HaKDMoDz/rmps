@@ -240,6 +240,7 @@
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Gtd\Memo.cs" />
     <Compile Include="Gtd\M\ADates.cs" />
     <Compile Include="Gtd\CGtd.cs" />
     <Compile Include="Gtd\M\Dates\Day.cs" />

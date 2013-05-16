@@ -342,7 +342,7 @@ namespace Me.Amon.Pwd.M
 
             // HintItem
             HintAtt hint = new HintAtt();
-            hint.Text = _Key.Gtd == null ? "<无提醒>" : _Key.Gtd.Title;
+            hint.Text = _Key.Gtd == null ? "<无提醒>" : _Key.Gtd.Subject;
             hint.Data = _Key.GtdMemo;
             hint.Gtd = _Key.Gtd;
             hint.Icon = _Key.GtdIcon;

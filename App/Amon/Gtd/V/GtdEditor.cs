@@ -56,7 +56,7 @@ namespace Me.Amon.Gtd.V
                 MGtd = new MGtd();
             }
 
-            TbTitle.Text = MGtd.Title;
+            TbTitle.Text = MGtd.Subject;
             switch (MGtd.Type)
             {
                 case CGtd.TYPE_EVENT:
@@ -111,7 +111,7 @@ namespace Me.Amon.Gtd.V
                 TbTitle.Focus();
                 return;
             }
-            MGtd.Title = text;
+            MGtd.Subject = text;
 
             if (MGtd.Type == 0)
             {

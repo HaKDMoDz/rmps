@@ -341,6 +341,10 @@ namespace Me.Amon.Pwd._Key
         {
             foreach (Key key in keys)
             {
+                if (key == null)
+                {
+                    continue;
+                }
                 LbKey.Items.Add(key);
 
                 if (CharUtil.IsValidateHash(key.IcoName))

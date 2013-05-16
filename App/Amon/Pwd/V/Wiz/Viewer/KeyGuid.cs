@@ -132,12 +132,12 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
             {
-                _AWiz.ShowHint(string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
+                _AWiz.ShowHint(string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Subject, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
                 return;
             }
             if (gtd.Status == Gtd.CGtd.STATUS_NOTICE)
             {
-                _AWiz.ShowHint(string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
+                _AWiz.ShowHint(string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Subject, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
                 return;
             }
         }
