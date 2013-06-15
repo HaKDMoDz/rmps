@@ -63,6 +63,7 @@ namespace Me.Amon.Pwd.M
             BackFileCount = 3;
             NoticeInterval = 5;
             PasswordLength = 8;
+            PasswordUdc = "AUDC000000000005";
         }
         #endregion
 

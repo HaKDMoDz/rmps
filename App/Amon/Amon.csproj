@@ -94,6 +94,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -613,6 +616,8 @@
     <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\E\_Att\CopyDataAction.cs" />
     <Compile Include="Pwd\E\_Att\FillDataAction.cs" />
+    <Compile Include="Pwd\E\_Key\SelectNextAction.cs" />
+    <Compile Include="Pwd\E\_Key\SelectPrevAction.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
       <SubType>Form</SubType>

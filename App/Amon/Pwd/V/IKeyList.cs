@@ -51,5 +51,9 @@ namespace Me.Amon.Pwd.V
         void ChangeKeyLabel(int label);
 
         void ChangeKeyMajor(int major);
+
+        void PrevKey();
+
+        void NextKey();
     }
 }

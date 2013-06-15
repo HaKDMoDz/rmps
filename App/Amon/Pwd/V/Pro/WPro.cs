@@ -74,7 +74,7 @@ namespace Me.Amon.Pwd.V.Pro
             panel.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowKey()
         {
             _UserAction = false;
             _DataList.Rows.Clear();
@@ -86,7 +86,10 @@ namespace Me.Amon.Pwd.V.Pro
             }
             _UserAction = true;
 
-            GvAttList.Rows[1].Selected = true;
+            if (GvAttList.Rows.Count > 1)
+            {
+                GvAttList.Rows[1].Selected = true;
+            }
         }
 
         public void AppendKey()
@@ -191,7 +194,7 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(att);
         }
 
-        public void SelectPrev()
+        public void SelectPrevAtt()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -212,7 +215,7 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(_SafeModel.GetAtt(index));
         }
 
-        public void SelectNext()
+        public void SelectNextAtt()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -233,7 +236,7 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(_SafeModel.GetAtt(index));
         }
 
-        public void MoveUp()
+        public void MoveUpSelectedAtt()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -255,7 +258,7 @@ namespace Me.Amon.Pwd.V.Pro
             SelectRow(i1);
         }
 
-        public void MoveDown()
+        public void MoveDownSelectedAtt()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {

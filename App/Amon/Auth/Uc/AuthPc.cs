@@ -93,7 +93,7 @@ namespace Me.Amon.Auth.Uc
 
         public void ShowMenu(Control control, int x, int y)
         {
-            CmMenu.Show(control, x, y);
+            //CmMenu.Show(control, x, y);
         }
         #endregion
 

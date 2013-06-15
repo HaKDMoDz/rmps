@@ -487,6 +487,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null)
             {
+                DoShowCmp();
                 DoShowKey(_SafeModel.Key);
             }
         }
@@ -498,24 +499,41 @@ namespace Me.Amon.Pwd
                 _SafeModel.Key = key;
                 _SafeModel.Decode();
 
+                DoShowCmp();
                 DoShowKey(key);
+            }
+        }
+
+        /// <summary>
+        /// 显示合适的组件
+        /// </summary>
+        private void DoShowCmp()
+        {
+            if (_PwdView != _KeyInfo)
+            {
+                return;
+            }
+
+            if (_ViewModel.Pattern == CPwd.PATTERN_WIZ)
+            {
+                ShowAWiz();
+                return;
+            }
+
+            if (_ViewModel.Pattern == CPwd.PATTERN_PRO)
+            {
+                ShowAPro();
             }
         }
 
         private void DoShowKey(Key key)
         {
-            if (_PwdView == _KeyInfo)
+            _PwdView.ShowKey();
+
+            if (key == null)
             {
-                if (_ViewModel.Pattern == CPwd.PATTERN_WIZ)
-                {
-                    ShowAWiz();
-                }
-                else if (_ViewModel.Pattern == CPwd.PATTERN_PRO)
-                {
-                    ShowAPro();
-                }
+                return;
             }
-            _PwdView.ShowData();
 
             ItemGroup group = _XmlMenu.GetGroup(CPwd.KEY_LABEL);
             if (group != null)
@@ -973,6 +991,16 @@ namespace Me.Amon.Pwd
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
+
+        public void SelectPrevKey()
+        {
+            _KeyList.PrevKey();
+        }
+
+        public void SelectNextKey()
+        {
+            _KeyList.NextKey();
+        }
         #endregion
 
         #region 属性处理
@@ -1038,7 +1066,7 @@ namespace Me.Amon.Pwd
         {
             if (_PwdView != null)
             {
-                _PwdView.SelectPrev();
+                _PwdView.SelectPrevAtt();
             }
         }
 
@@ -1046,7 +1074,7 @@ namespace Me.Amon.Pwd
         {
             if (_PwdView != null)
             {
-                _PwdView.SelectNext();
+                _PwdView.SelectNextAtt();
             }
         }
 
@@ -1054,7 +1082,7 @@ namespace Me.Amon.Pwd
         {
             if (_PwdView != null)
             {
-                _PwdView.MoveUp();
+                _PwdView.MoveUpSelectedAtt();
             }
         }
 
@@ -1062,7 +1090,7 @@ namespace Me.Amon.Pwd
         {
             if (_PwdView != null)
             {
-                _PwdView.MoveDown();
+                _PwdView.MoveDownSelectedAtt();
             }
         }
         #endregion
@@ -1121,8 +1149,9 @@ namespace Me.Amon.Pwd
 
             _PwdView = _ProView;
             _PwdView.InitView(ScData.Panel2);
-            DoShowKey(_SafeModel.Key);
             _ViewModel.Pattern = CPwd.PATTERN_PRO;
+            DoShowCmp();
+            DoShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
             if (group != null)
@@ -1155,6 +1184,8 @@ namespace Me.Amon.Pwd
             _PwdView = _WizView;
             _PwdView.InitView(ScData.Panel2);
             _ViewModel.Pattern = CPwd.PATTERN_WIZ;
+            DoShowCmp();
+            DoShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
             if (group != null)

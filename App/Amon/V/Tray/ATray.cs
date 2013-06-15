@@ -70,8 +70,11 @@ namespace Me.Amon.V.Tray
 
         public void ShowBubbleTips(string tips)
         {
-            _Tips = tips;
-            _Tray.ShowBalloonTip(0, "阿木密码箱", tips, ToolTipIcon.Info);
+            if (!string.IsNullOrWhiteSpace(tips))
+            {
+                _Tips = tips;
+                _Tray.ShowBalloonTip(0, "阿木密码箱", tips, ToolTipIcon.Info);
+            }
         }
 
         public void ShowFlicker()
@@ -111,11 +114,12 @@ namespace Me.Amon.V.Tray
         {
             HideFlicker();
             _Main.ShowDefaultApp();
+            _Main.Activate();
         }
 
         private void TrayMouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && !string.IsNullOrWhiteSpace(_Tips))
             {
                 _Tray.ShowBalloonTip(0, "阿木密码箱", _Tips, ToolTipIcon.Info);
             }

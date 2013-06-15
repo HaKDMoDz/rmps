@@ -41,7 +41,7 @@ namespace Me.Amon.Pwd.V
             panel.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowKey()
         {
         }
 
@@ -66,19 +66,19 @@ namespace Me.Amon.Pwd.V
         {
         }
 
-        public void SelectPrev()
+        public void SelectPrevAtt()
         {
         }
 
-        public void SelectNext()
+        public void SelectNextAtt()
         {
         }
 
-        public void MoveUp()
+        public void MoveUpSelectedAtt()
         {
         }
 
-        public void MoveDown()
+        public void MoveDownSelectedAtt()
         {
         }
 

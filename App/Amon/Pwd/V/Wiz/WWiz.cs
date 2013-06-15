@@ -70,9 +70,12 @@ namespace Me.Amon.Pwd.V.Wiz
             panel.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowKey()
         {
-            ShowGuid();
+            if (_SafeModel.Key != null)
+            {
+                ShowGuid();
+            }
         }
 
         public void AppendKey()
@@ -105,19 +108,19 @@ namespace Me.Amon.Pwd.V.Wiz
         {
         }
 
-        public void SelectPrev()
+        public void SelectPrevAtt()
         {
         }
 
-        public void SelectNext()
+        public void SelectNextAtt()
         {
         }
 
-        public void MoveUp()
+        public void MoveUpSelectedAtt()
         {
         }
 
-        public void MoveDown()
+        public void MoveDownSelectedAtt()
         {
         }
 

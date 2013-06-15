@@ -6,29 +6,36 @@ namespace Me.Amon.Pwd
     {
         string Model { get; }
 
+        #region 界面控制
         void InitView(Panel panel);
 
         void HideView(Panel panel);
 
-        void ShowData();
+        bool Focus();
+        #endregion
 
+        void ShowKey();
+
+        #region 记录操作
         void AppendKey();
 
         bool UpdateKey();
 
         void DeleteKey();
+        #endregion
 
+        #region 属性操作
         void AppendAtt(int type);
 
         void ChangeAtt(int type);
 
-        void SelectPrev();
+        void SelectPrevAtt();
 
-        void SelectNext();
+        void SelectNextAtt();
 
-        void MoveUp();
+        void MoveUpSelectedAtt();
 
-        void MoveDown();
+        void MoveDownSelectedAtt();
 
         void CutAtt();
 
@@ -41,7 +48,6 @@ namespace Me.Amon.Pwd
         void SaveAtt();
 
         void DropAtt();
-
-        bool Focus();
+        #endregion
     }
 }

@@ -231,6 +231,25 @@ namespace Me.Amon.Pwd._Key
 
             LbKey.Refresh();
         }
+
+        public void PrevKey()
+        {
+            int idx = LbKey.SelectedIndex;
+            if (idx > 0 && _WPwd.CanChange())
+            {
+                LbKey.SelectedIndex -= 1;
+            }
+        }
+
+        public void NextKey()
+        {
+            int cnt = LbKey.Items.Count - 1;
+            int idx = LbKey.SelectedIndex;
+            if (idx < cnt && _WPwd.CanChange())
+            {
+                LbKey.SelectedIndex += 1;
+            }
+        }
         #endregion
 
         #region 事件处理

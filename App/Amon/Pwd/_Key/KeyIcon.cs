@@ -196,7 +196,7 @@ namespace Me.Amon.Pwd._Key
                 _DirEdit = new DirEditer(this);
                 _DirEdit.Init();
                 _DirEdit.Location = new Point(138, 12);
-                _DirEdit.Size = new Size(248, 249);
+                _DirEdit.Size = new Size(278, 249);
                 _DirEdit.TabIndex = 1;
             }
             if (_IcoView != null)
@@ -214,7 +214,7 @@ namespace Me.Amon.Pwd._Key
                 _IcoView = new IcoEditer(this, _IsEdit);
                 _IcoView.InitOnce();
                 _IcoView.Location = new Point(138, 12);
-                _IcoView.Size = new Size(248, 249);
+                _IcoView.Size = new Size(278, 249);
                 _IcoView.TabIndex = 1;
             }
             if (_DirEdit != null)

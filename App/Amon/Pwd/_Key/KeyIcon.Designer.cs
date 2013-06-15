@@ -59,26 +59,26 @@
             this.MiUpdate,
             this.MiDelete});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(142, 70);
+            this.CmMenu.Size = new System.Drawing.Size(140, 70);
             // 
             // MiAppend
             // 
             this.MiAppend.Name = "MiAppend";
-            this.MiAppend.Size = new System.Drawing.Size(141, 22);
+            this.MiAppend.Size = new System.Drawing.Size(139, 22);
             this.MiAppend.Text = "添加分类(&A)";
             this.MiAppend.Click += new System.EventHandler(this.MiAppend_Click);
             // 
             // MiUpdate
             // 
             this.MiUpdate.Name = "MiUpdate";
-            this.MiUpdate.Size = new System.Drawing.Size(141, 22);
+            this.MiUpdate.Size = new System.Drawing.Size(139, 22);
             this.MiUpdate.Text = "更新分类(&U)";
             this.MiUpdate.Click += new System.EventHandler(this.MiUpdate_Click);
             // 
             // MiDelete
             // 
             this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(141, 22);
+            this.MiDelete.Size = new System.Drawing.Size(139, 22);
             this.MiDelete.Text = "删除分类(&D)";
             this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 273);
+            this.ClientSize = new System.Drawing.Size(428, 273);
             this.Controls.Add(this.LsDir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

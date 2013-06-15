@@ -58,6 +58,7 @@
             this.PbMenu.TabIndex = 2;
             this.PbMenu.TabStop = false;
             this.TpTips.SetToolTip(this.PbMenu, "系统选单");
+            this.PbMenu.Visible = false;
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtOk

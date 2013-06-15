@@ -80,6 +80,8 @@
     <Action Id="change-major" Class="Me.Amon.Pwd.E._Key.ChangeMajorAction"/>
     <Action Id="sort-dir" Class="Me.Amon.Pwd.E._Key.SortDirAction"/>
     <Action Id="sort-key" Class="Me.Amon.Pwd.E._Key.SortKeyAction"/>
+	<Action Id="prev-key" Class="Me.Amon.Pwd.E._Key.SelectPrevAction"/>
+	<Action Id="next-key" Class="Me.Amon.Pwd.E._Key.SelectNextAction"/>
   </Actions>
 
   <!--系统快捷键-->
@@ -93,6 +95,8 @@
     <Stroke Key="% C" ActionId="att-edit-copy" Memo="复制属性"/>
     <Stroke Key="% U" ActionId="update-att" Memo="保存属性"/>
     <Stroke Key="% D" ActionId="delete-att" Memo="删除属性"/>
+	<Stroke Key="PageUp" ActionId="prev-att" Memo="上一条记录"/>
+	<Stroke Key="PageDown" ActionId="next-att" Memo="下一条记录"/>
   </Strokes>
 
   <!--魔方密码菜单栏-->

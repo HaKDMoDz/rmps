@@ -45,7 +45,7 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
-        public void ShowData()
+        public void ShowKey()
         {
         }
 
@@ -70,19 +70,19 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
-        public void SelectPrev()
+        public void SelectPrevAtt()
         {
         }
 
-        public void SelectNext()
+        public void SelectNextAtt()
         {
         }
 
-        public void MoveUp()
+        public void MoveUpSelectedAtt()
         {
         }
 
-        public void MoveDown()
+        public void MoveDownSelectedAtt()
         {
         }
 
